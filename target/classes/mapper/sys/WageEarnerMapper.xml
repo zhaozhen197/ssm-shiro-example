@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zanezz.sys.mapper.WageEarnerMapper">
+  <resultMap id="BaseResultMap" type="cn.zanezz.sys.entity.WageEarner">
+    <id column="wage_earner_id" jdbcType="INTEGER" property="wageEarnerId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="userPhone" jdbcType="VARCHAR" property="userphone" />
+    <result column="user_name1" jdbcType="VARCHAR" property="userName1" />
+    <result column="salary_month" jdbcType="INTEGER" property="salaryMonth" />
+    <result column="salary_type" jdbcType="VARCHAR" property="salaryType" />
+    <result column="punch_time" jdbcType="VARCHAR" property="punchTime" />
+    <result column="companyType" jdbcType="VARCHAR" property="companytype" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    wage_earner_id, user_id, userPhone, user_name1, salary_month, salary_type, punch_time, 
+    companyType, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from wage_earner
+    where wage_earner_id = #{wageEarnerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from wage_earner
+    where wage_earner_id = #{wageEarnerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.zanezz.sys.entity.WageEarner">
+    insert into wage_earner (wage_earner_id, user_id, userPhone, 
+      user_name1, salary_month, salary_type, 
+      punch_time, companyType, create_time, 
+      update_time)
+    values (#{wageEarnerId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{userphone,jdbcType=VARCHAR}, 
+      #{userName1,jdbcType=VARCHAR}, #{salaryMonth,jdbcType=INTEGER}, #{salaryType,jdbcType=VARCHAR}, 
+      #{punchTime,jdbcType=VARCHAR}, #{companytype,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.zanezz.sys.entity.WageEarner">
+    insert into wage_earner
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="wageEarnerId != null">
+        wage_earner_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userphone != null">
+        userPhone,
+      </if>
+      <if test="userName1 != null">
+        user_name1,
+      </if>
+      <if test="salaryMonth != null">
+        salary_month,
+      </if>
+      <if test="salaryType != null">
+        salary_type,
+      </if>
+      <if test="punchTime != null">
+        punch_time,
+      </if>
+      <if test="companytype != null">
+        companyType,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="wageEarnerId != null">
+        #{wageEarnerId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userphone != null">
+        #{userphone,jdbcType=VARCHAR},
+      </if>
+      <if test="userName1 != null">
+        #{userName1,jdbcType=VARCHAR},
+      </if>
+      <if test="salaryMonth != null">
+        #{salaryMonth,jdbcType=INTEGER},
+      </if>
+      <if test="salaryType != null">
+        #{salaryType,jdbcType=VARCHAR},
+      </if>
+      <if test="punchTime != null">
+        #{punchTime,jdbcType=VARCHAR},
+      </if>
+      <if test="companytype != null">
+        #{companytype,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.zanezz.sys.entity.WageEarner">
+    update wage_earner
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userphone != null">
+        userPhone = #{userphone,jdbcType=VARCHAR},
+      </if>
+      <if test="userName1 != null">
+        user_name1 = #{userName1,jdbcType=VARCHAR},
+      </if>
+      <if test="salaryMonth != null">
+        salary_month = #{salaryMonth,jdbcType=INTEGER},
+      </if>
+      <if test="salaryType != null">
+        salary_type = #{salaryType,jdbcType=VARCHAR},
+      </if>
+      <if test="punchTime != null">
+        punch_time = #{punchTime,jdbcType=VARCHAR},
+      </if>
+      <if test="companytype != null">
+        companyType = #{companytype,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where wage_earner_id = #{wageEarnerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.zanezz.sys.entity.WageEarner">
+    update wage_earner
+    set user_id = #{userId,jdbcType=INTEGER},
+      userPhone = #{userphone,jdbcType=VARCHAR},
+      user_name1 = #{userName1,jdbcType=VARCHAR},
+      salary_month = #{salaryMonth,jdbcType=INTEGER},
+      salary_type = #{salaryType,jdbcType=VARCHAR},
+      punch_time = #{punchTime,jdbcType=VARCHAR},
+      companyType = #{companytype,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where wage_earner_id = #{wageEarnerId,jdbcType=INTEGER}
+  </update>
+
+  <!--根据用户id获取相关信息-->
+  <select id="getWageEarnerByUserId" parameterType="int" resultType="cn.zanezz.sys.entity.WageEarner">
+    select * from wage_earner where user_id =#{userId}
+  </select>
+
+  <select id="selectAllWageEarner" resultType="cn.zanezz.sys.entity.WageEarner">
+    select
+    <include refid="Base_Column_List" />
+    from  wage_earner
+  </select>
+</mapper>

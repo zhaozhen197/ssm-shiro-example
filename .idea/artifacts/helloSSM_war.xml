@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="helloSSM:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>helloSSM</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="helloSSM.war">
+      <element id="artifact" artifact-name="helloSSM:war exploded" />
+    </root>
+  </artifact>
+</component>

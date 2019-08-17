@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zanezz.sys.mapper.FullPaymentCarMapper">
+  <resultMap id="BaseResultMap" type="cn.zanezz.sys.entity.FullPaymentCar">
+    <id column="full_payment_car_id" jdbcType="INTEGER" property="fullPaymentCarId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+    <result column="user_name1" jdbcType="VARCHAR" property="userName1" />
+    <result column="car_value" jdbcType="INTEGER" property="carValue" />
+    <result column="car_years" jdbcType="INTEGER" property="carYears" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    full_payment_car_id, user_id, user_phone, user_name1, car_value, car_years, create_time, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from full_payment_car
+    where full_payment_car_id = #{fullPaymentCarId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from full_payment_car
+    where full_payment_car_id = #{fullPaymentCarId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.zanezz.sys.entity.FullPaymentCar">
+    insert into full_payment_car (full_payment_car_id, user_id, user_phone, 
+      user_name1, car_value, car_years, 
+      create_time, update_time)
+    values (#{fullPaymentCarId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{userPhone,jdbcType=VARCHAR}, 
+      #{userName1,jdbcType=VARCHAR}, #{carValue,jdbcType=INTEGER}, #{carYears,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.zanezz.sys.entity.FullPaymentCar">
+    insert into full_payment_car
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fullPaymentCarId != null">
+        full_payment_car_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userPhone != null">
+        user_phone,
+      </if>
+      <if test="userName1 != null">
+        user_name1,
+      </if>
+      <if test="carValue != null">
+        car_value,
+      </if>
+      <if test="carYears != null">
+        car_years,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fullPaymentCarId != null">
+        #{fullPaymentCarId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userPhone != null">
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userName1 != null">
+        #{userName1,jdbcType=VARCHAR},
+      </if>
+      <if test="carValue != null">
+        #{carValue,jdbcType=INTEGER},
+      </if>
+      <if test="carYears != null">
+        #{carYears,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.zanezz.sys.entity.FullPaymentCar">
+    update full_payment_car
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userPhone != null">
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userName1 != null">
+        user_name1 = #{userName1,jdbcType=VARCHAR},
+      </if>
+      <if test="carValue != null">
+        car_value = #{carValue,jdbcType=INTEGER},
+      </if>
+      <if test="carYears != null">
+        car_years = #{carYears,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where full_payment_car_id = #{fullPaymentCarId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.zanezz.sys.entity.FullPaymentCar">
+    update full_payment_car
+    set user_id = #{userId,jdbcType=INTEGER},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      user_name1 = #{userName1,jdbcType=VARCHAR},
+      car_value = #{carValue,jdbcType=INTEGER},
+      car_years = #{carYears,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where full_payment_car_id = #{fullPaymentCarId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectFullPaymentCarByUserId" resultType="cn.zanezz.sys.entity.FullPaymentCar" parameterType="int">
+    select * from full_payment_car where  user_id = #{userId};
+  </select>
+
+  <select id="selectAllFullPaymentCar" resultType="cn.zanezz.sys.entity.FullPaymentCar">
+    select
+    <include refid="Base_Column_List" />
+    from  full_payment_car
+  </select>
+</mapper>

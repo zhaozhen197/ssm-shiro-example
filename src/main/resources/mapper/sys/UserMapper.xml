@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zanezz.sys.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="cn.zanezz.sys.entity.User">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="name1" jdbcType="VARCHAR" property="name1" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="loan_money" jdbcType="INTEGER" property="loanMoney" />
+    <result column="loan_time_limit" jdbcType="INTEGER" property="loanTimeLimit" />
+    <result column="name2" jdbcType="VARCHAR" property="name2" />
+    <result column="identity" jdbcType="VARCHAR" property="identity" />
+    <result column="fund" jdbcType="VARCHAR" property="fund" />
+    <result column="social_security" jdbcType="VARCHAR" property="socialSecurity" />
+    <result column="house" jdbcType="VARCHAR" property="house" />
+    <result column="car" jdbcType="VARCHAR" property="car" />
+    <result column="insurance" jdbcType="VARCHAR" property="insurance" />
+    <result column="credit" jdbcType="VARCHAR" property="credit" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, type, name1, phone, loan_money, loan_time_limit, name2, identity, fund, 
+    social_security, house, car, insurance, credit, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.zanezz.sys.entity.User">
+    insert into user (user_id, type, name1, 
+      phone, loan_money, loan_time_limit, 
+      name2, identity, fund, 
+      social_security, house, car, 
+      insurance, credit, create_time, 
+      update_time)
+    values (#{userId,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{name1,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{loanMoney,jdbcType=INTEGER}, #{loanTimeLimit,jdbcType=INTEGER}, 
+      #{name2,jdbcType=VARCHAR}, #{identity,jdbcType=VARCHAR}, #{fund,jdbcType=VARCHAR}, 
+      #{socialSecurity,jdbcType=VARCHAR}, #{house,jdbcType=VARCHAR}, #{car,jdbcType=VARCHAR}, 
+      #{insurance,jdbcType=VARCHAR}, #{credit,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.zanezz.sys.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="name1 != null">
+        name1,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="loanMoney != null">
+        loan_money,
+      </if>
+      <if test="loanTimeLimit != null">
+        loan_time_limit,
+      </if>
+      <if test="name2 != null">
+        name2,
+      </if>
+      <if test="identity != null">
+        identity,
+      </if>
+      <if test="fund != null">
+        fund,
+      </if>
+      <if test="socialSecurity != null">
+        social_security,
+      </if>
+      <if test="house != null">
+        house,
+      </if>
+      <if test="car != null">
+        car,
+      </if>
+      <if test="insurance != null">
+        insurance,
+      </if>
+      <if test="credit != null">
+        credit,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="name1 != null">
+        #{name1,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="loanMoney != null">
+        #{loanMoney,jdbcType=INTEGER},
+      </if>
+      <if test="loanTimeLimit != null">
+        #{loanTimeLimit,jdbcType=INTEGER},
+      </if>
+      <if test="name2 != null">
+        #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null">
+        #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="fund != null">
+        #{fund,jdbcType=VARCHAR},
+      </if>
+      <if test="socialSecurity != null">
+        #{socialSecurity,jdbcType=VARCHAR},
+      </if>
+      <if test="house != null">
+        #{house,jdbcType=VARCHAR},
+      </if>
+      <if test="car != null">
+        #{car,jdbcType=VARCHAR},
+      </if>
+      <if test="insurance != null">
+        #{insurance,jdbcType=VARCHAR},
+      </if>
+      <if test="credit != null">
+        #{credit,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.zanezz.sys.entity.User">
+    update user
+    <set>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="name1 != null">
+        name1 = #{name1,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="loanMoney != null">
+        loan_money = #{loanMoney,jdbcType=INTEGER},
+      </if>
+      <if test="loanTimeLimit != null">
+        loan_time_limit = #{loanTimeLimit,jdbcType=INTEGER},
+      </if>
+      <if test="name2 != null">
+        name2 = #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null">
+        identity = #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="fund != null">
+        fund = #{fund,jdbcType=VARCHAR},
+      </if>
+      <if test="socialSecurity != null">
+        social_security = #{socialSecurity,jdbcType=VARCHAR},
+      </if>
+      <if test="house != null">
+        house = #{house,jdbcType=VARCHAR},
+      </if>
+      <if test="car != null">
+        car = #{car,jdbcType=VARCHAR},
+      </if>
+      <if test="insurance != null">
+        insurance = #{insurance,jdbcType=VARCHAR},
+      </if>
+      <if test="credit != null">
+        credit = #{credit,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.zanezz.sys.entity.User">
+    update user
+    set type = #{type,jdbcType=VARCHAR},
+      name1 = #{name1,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      loan_money = #{loanMoney,jdbcType=INTEGER},
+      loan_time_limit = #{loanTimeLimit,jdbcType=INTEGER},
+      name2 = #{name2,jdbcType=VARCHAR},
+      identity = #{identity,jdbcType=VARCHAR},
+      fund = #{fund,jdbcType=VARCHAR},
+      social_security = #{socialSecurity,jdbcType=VARCHAR},
+      house = #{house,jdbcType=VARCHAR},
+      car = #{car,jdbcType=VARCHAR},
+      insurance = #{insurance,jdbcType=VARCHAR},
+      credit = #{credit,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="selectUserByPhone" parameterType="String" resultType="cn.zanezz.sys.entity.User">
+    select <include refid="Base_Column_List" />
+    from user
+    where phone=#{phone}
+  </select>
+
+  <select id="selectAllUser" resultType="cn.zanezz.sys.entity.User">
+    select
+    <include refid="Base_Column_List" />
+    from  user
+  </select>
+
+  <select id="selectNumberOfUser" resultType="int">
+          SELECT count(*) FROM user
+  </select>
+
+  <select id="selectPageOfUser" parameterType="hashmap" resultType="cn.zanezz.sys.entity.User">
+    select
+    <include refid="Base_Column_List" />
+    from user order by user_id LIMIT #{offset},#{pagenumber};
+  </select>
+
+</mapper>

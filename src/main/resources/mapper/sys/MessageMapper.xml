@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zanezz.sys.mapper.MessageMapper">
+  <resultMap id="BaseResultMap" type="cn.zanezz.sys.entity.Message">
+    <id column="message_id" jdbcType="INTEGER" property="messageId"/>
+    <result column="phone" jdbcType="VARCHAR" property="phone"/>
+    <result column="validate_code" jdbcType="INTEGER" property="validateCode"/>
+    <result column="dead_line" jdbcType="INTEGER" property="deadLine"/>
+    <result column="usable" jdbcType="TINYINT" property="usable"/>
+    <result column="sended" jdbcType="TINYINT" property="sended"/>
+    <result column="creation_datetime" jdbcType="TIMESTAMP" property="creationDatetime"/>
+    <result column="update_datetime" jdbcType="TIMESTAMP" property="updateDatetime"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    message_id, phone, validate_code, dead_line, usable, sended, creation_datetime, update_datetime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from message
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from message
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.zanezz.sys.entity.Message">
+    insert into message (message_id, phone, validate_code, 
+      dead_line, usable, sended, 
+      creation_datetime, update_datetime)
+    values (#{messageId,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{validateCode,jdbcType=INTEGER}, 
+      #{deadLine,jdbcType=INTEGER}, #{usable,jdbcType=TINYINT}, #{sended,jdbcType=TINYINT}, 
+      #{creationDatetime,jdbcType=TIMESTAMP}, #{updateDatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.zanezz.sys.entity.Message">
+    insert into message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="messageId != null">
+        message_id,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="validateCode != null">
+        validate_code,
+      </if>
+      <if test="deadLine != null">
+        dead_line,
+      </if>
+      <if test="usable != null">
+        usable,
+      </if>
+      <if test="sended != null">
+        sended,
+      </if>
+      <if test="creationDatetime != null">
+        creation_datetime,
+      </if>
+      <if test="updateDatetime != null">
+        update_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="messageId != null">
+        #{messageId,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="validateCode != null">
+        #{validateCode,jdbcType=INTEGER},
+      </if>
+      <if test="deadLine != null">
+        #{deadLine,jdbcType=INTEGER},
+      </if>
+      <if test="usable != null">
+        #{usable,jdbcType=TINYINT},
+      </if>
+      <if test="sended != null">
+        #{sended,jdbcType=TINYINT},
+      </if>
+      <if test="creationDatetime != null">
+        #{creationDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null">
+        #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.zanezz.sys.entity.Message">
+    update message
+    <set>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="validateCode != null">
+        validate_code = #{validateCode,jdbcType=INTEGER},
+      </if>
+      <if test="deadLine != null">
+        dead_line = #{deadLine,jdbcType=INTEGER},
+      </if>
+      <if test="usable != null">
+        usable = #{usable,jdbcType=TINYINT},
+      </if>
+      <if test="sended != null">
+        sended = #{sended,jdbcType=TINYINT},
+      </if>
+      <if test="creationDatetime != null">
+        creation_datetime = #{creationDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null">
+        update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.zanezz.sys.entity.Message">
+    update message
+    set phone = #{phone,jdbcType=VARCHAR},
+      validate_code = #{validateCode,jdbcType=INTEGER},
+      dead_line = #{deadLine,jdbcType=INTEGER},
+      usable = #{usable,jdbcType=TINYINT},
+      sended = #{sended,jdbcType=TINYINT},
+      creation_datetime = #{creationDatetime,jdbcType=TIMESTAMP},
+      update_datetime = #{updateDatetime,jdbcType=TIMESTAMP}
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </update>
+
+  <!--根据电话号码来查找验证码-->
+  <select id="selectCodeByPhone" parameterType="String" resultType="cn.zanezz.sys.entity.Message">
+    select * from message where phone=#{phone,jdbcType=VARCHAR} and sended = 1 and usable = 0 order by dead_line desc
+  </select>
+
+  <!--将验证码置为已使用-->
+  <update id="updateUsableOfMessage" parameterType="Integer">
+    update message  set usable = 1 where message_id = #{messageId}
+  </update>
+
+
+</mapper>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="json">
+    <CLASSES>
+      <root url="jar://E:/jars/json/commons-beanutils-1.9.2.jar!/" />
+      <root url="jar://E:/jars/json/commons-collections-3.2.1.jar!/" />
+      <root url="jar://E:/jars/json/commons-lang-2.6.jar!/" />
+      <root url="jar://E:/jars/json/ezmorph-1.0.6.jar!/" />
+      <root url="jar://E:/jars/json/json-lib-2.4-jdk15.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

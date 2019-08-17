@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zanezz.sys.mapper.PersonMapper">
+  <resultMap id="BaseResultMap" type="cn.zanezz.sys.entity.Person">
+    <id column="person_id" jdbcType="INTEGER" property="personId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+    <result column="user_name1" jdbcType="VARCHAR" property="userName1" />
+    <result column="personal_expenses" jdbcType="INTEGER" property="personalExpenses" />
+    <result column="cash_expenses" jdbcType="INTEGER" property="cashExpenses" />
+    <result column="operation_years" jdbcType="VARCHAR" property="operationYears" />
+    <result column="location_of_company" jdbcType="VARCHAR" property="locationOfCompany" />
+    <result column="license" jdbcType="VARCHAR" property="license" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    person_id, user_id, user_phone, user_name1, personal_expenses, cash_expenses, operation_years, 
+    location_of_company, license, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from person
+    where person_id = #{personId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from person
+    where person_id = #{personId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.zanezz.sys.entity.Person">
+    insert into person (person_id, user_id, user_phone, 
+      user_name1, personal_expenses, cash_expenses, 
+      operation_years, location_of_company, license, 
+      create_time, update_time)
+    values (#{personId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{userPhone,jdbcType=VARCHAR}, 
+      #{userName1,jdbcType=VARCHAR}, #{personalExpenses,jdbcType=INTEGER}, #{cashExpenses,jdbcType=INTEGER}, 
+      #{operationYears,jdbcType=VARCHAR}, #{locationOfCompany,jdbcType=VARCHAR}, #{license,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.zanezz.sys.entity.Person">
+    insert into person
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="personId != null">
+        person_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userPhone != null">
+        user_phone,
+      </if>
+      <if test="userName1 != null">
+        user_name1,
+      </if>
+      <if test="personalExpenses != null">
+        personal_expenses,
+      </if>
+      <if test="cashExpenses != null">
+        cash_expenses,
+      </if>
+      <if test="operationYears != null">
+        operation_years,
+      </if>
+      <if test="locationOfCompany != null">
+        location_of_company,
+      </if>
+      <if test="license != null">
+        license,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="personId != null">
+        #{personId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userPhone != null">
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userName1 != null">
+        #{userName1,jdbcType=VARCHAR},
+      </if>
+      <if test="personalExpenses != null">
+        #{personalExpenses,jdbcType=INTEGER},
+      </if>
+      <if test="cashExpenses != null">
+        #{cashExpenses,jdbcType=INTEGER},
+      </if>
+      <if test="operationYears != null">
+        #{operationYears,jdbcType=VARCHAR},
+      </if>
+      <if test="locationOfCompany != null">
+        #{locationOfCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="license != null">
+        #{license,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.zanezz.sys.entity.Person">
+    update person
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userPhone != null">
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userName1 != null">
+        user_name1 = #{userName1,jdbcType=VARCHAR},
+      </if>
+      <if test="personalExpenses != null">
+        personal_expenses = #{personalExpenses,jdbcType=INTEGER},
+      </if>
+      <if test="cashExpenses != null">
+        cash_expenses = #{cashExpenses,jdbcType=INTEGER},
+      </if>
+      <if test="operationYears != null">
+        operation_years = #{operationYears,jdbcType=VARCHAR},
+      </if>
+      <if test="locationOfCompany != null">
+        location_of_company = #{locationOfCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="license != null">
+        license = #{license,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where person_id = #{personId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.zanezz.sys.entity.Person">
+    update person
+    set user_id = #{userId,jdbcType=INTEGER},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      user_name1 = #{userName1,jdbcType=VARCHAR},
+      personal_expenses = #{personalExpenses,jdbcType=INTEGER},
+      cash_expenses = #{cashExpenses,jdbcType=INTEGER},
+      operation_years = #{operationYears,jdbcType=VARCHAR},
+      location_of_company = #{locationOfCompany,jdbcType=VARCHAR},
+      license = #{license,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where person_id = #{personId,jdbcType=INTEGER}
+  </update>
+
+  <!--根据用户id获取相关信息-->
+  <select id="getPersonByUserId" parameterType="int" resultType="cn.zanezz.sys.entity.Person">
+          select * from person where user_id = #{userId}
+  </select>
+
+  <select id="selectAllPerson" resultType="cn.zanezz.sys.entity.Person">
+
+    select
+    <include refid="Base_Column_List" />
+    from  person
+
+  </select>
+</mapper>

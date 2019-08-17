@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zanezz.sys.mapper.CompanyLoanMapper">
+    <resultMap id="BaseResultMap" type="cn.zanezz.sys.entity.CompanyLoan">
+        <id column="company_loan_id" jdbcType="INTEGER" property="companyLoanId"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="name1" jdbcType="VARCHAR" property="name1"/>
+        <result column="identity" jdbcType="VARCHAR" property="identity"/>
+        <result column="company_years" jdbcType="INTEGER" property="companyYears"/>
+        <result column="stock_per" jdbcType="INTEGER" property="stockPer"/>
+        <result column="invoice_fee" jdbcType="INTEGER" property="invoiceFee"/>
+        <result column="tax_fee" jdbcType="INTEGER" property="taxFee"/>
+        <result column="invoice_fee_oneyear" jdbcType="INTEGER" property="invoiceFeeOneyear"/>
+        <result column="add_time" jdbcType="TIMESTAMP" property="addTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    company_loan_id, user_id, phone, name1, identity, company_years, stock_per, invoice_fee, 
+    tax_fee, invoice_fee_oneyear, add_time, update_time
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from company_loan
+        where company_loan_id = #{companyLoanId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from company_loan
+    where company_loan_id = #{companyLoanId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="cn.zanezz.sys.entity.CompanyLoan">
+    insert into company_loan (company_loan_id, user_id, phone, 
+      name1, identity, company_years, 
+      stock_per, invoice_fee, tax_fee, 
+      invoice_fee_oneyear, add_time, update_time
+      )
+    values (#{companyLoanId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, 
+      #{name1,jdbcType=VARCHAR}, #{identity,jdbcType=VARCHAR}, #{companyYears,jdbcType=INTEGER}, 
+      #{stockPer,jdbcType=INTEGER}, #{invoiceFee,jdbcType=INTEGER}, #{taxFee,jdbcType=INTEGER}, 
+      #{invoiceFeeOneyear,jdbcType=INTEGER}, #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="cn.zanezz.sys.entity.CompanyLoan">
+        insert into company_loan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="companyLoanId != null">
+                company_loan_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="name1 != null">
+                name1,
+            </if>
+            <if test="identity != null">
+                identity,
+            </if>
+            <if test="companyYears != null">
+                company_years,
+            </if>
+            <if test="stockPer != null">
+                stock_per,
+            </if>
+            <if test="invoiceFee != null">
+                invoice_fee,
+            </if>
+            <if test="taxFee != null">
+                tax_fee,
+            </if>
+            <if test="invoiceFeeOneyear != null">
+                invoice_fee_oneyear,
+            </if>
+            <if test="addTime != null">
+                add_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="companyLoanId != null">
+                #{companyLoanId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="name1 != null">
+                #{name1,jdbcType=VARCHAR},
+            </if>
+            <if test="identity != null">
+                #{identity,jdbcType=VARCHAR},
+            </if>
+            <if test="companyYears != null">
+                #{companyYears,jdbcType=INTEGER},
+            </if>
+            <if test="stockPer != null">
+                #{stockPer,jdbcType=INTEGER},
+            </if>
+            <if test="invoiceFee != null">
+                #{invoiceFee,jdbcType=INTEGER},
+            </if>
+            <if test="taxFee != null">
+                #{taxFee,jdbcType=INTEGER},
+            </if>
+            <if test="invoiceFeeOneyear != null">
+                #{invoiceFeeOneyear,jdbcType=INTEGER},
+            </if>
+            <if test="addTime != null">
+                #{addTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.zanezz.sys.entity.CompanyLoan">
+        update company_loan
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="name1 != null">
+                name1 = #{name1,jdbcType=VARCHAR},
+            </if>
+            <if test="identity != null">
+                identity = #{identity,jdbcType=VARCHAR},
+            </if>
+            <if test="companyYears != null">
+                company_years = #{companyYears,jdbcType=INTEGER},
+            </if>
+            <if test="stockPer != null">
+                stock_per = #{stockPer,jdbcType=INTEGER},
+            </if>
+            <if test="invoiceFee != null">
+                invoice_fee = #{invoiceFee,jdbcType=INTEGER},
+            </if>
+            <if test="taxFee != null">
+                tax_fee = #{taxFee,jdbcType=INTEGER},
+            </if>
+            <if test="invoiceFeeOneyear != null">
+                invoice_fee_oneyear = #{invoiceFeeOneyear,jdbcType=INTEGER},
+            </if>
+            <if test="addTime != null">
+                add_time = #{addTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where company_loan_id = #{companyLoanId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.zanezz.sys.entity.CompanyLoan">
+    update company_loan
+    set user_id = #{userId,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      name1 = #{name1,jdbcType=VARCHAR},
+      identity = #{identity,jdbcType=VARCHAR},
+      company_years = #{companyYears,jdbcType=INTEGER},
+      stock_per = #{stockPer,jdbcType=INTEGER},
+      invoice_fee = #{invoiceFee,jdbcType=INTEGER},
+      tax_fee = #{taxFee,jdbcType=INTEGER},
+      invoice_fee_oneyear = #{invoiceFeeOneyear,jdbcType=INTEGER},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where company_loan_id = #{companyLoanId,jdbcType=INTEGER}
+  </update>
+
+    <select id="selectCompanyLoanByUserId" resultType="cn.zanezz.sys.entity.CompanyLoan" parameterType="int">
+    select * from company_loan where  user_id = #{userId};
+  </select>
+
+    <select id="selectAllCompanyLoan" resultType="cn.zanezz.sys.entity.CompanyLoan">
+        select
+        <include refid="Base_Column_List"/>
+        from company_loan
+    </select>
+</mapper>
