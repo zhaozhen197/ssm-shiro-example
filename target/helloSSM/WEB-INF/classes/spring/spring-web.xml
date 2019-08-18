@@ -23,9 +23,10 @@
 	<!-- 整合Freemarker -->
 	<!-- 放在InternalResourceViewResolver的前面，优先找freemarker -->
 	<bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-		<property name="templateLoaderPath" value="classpath:templates/"/>
+		<property name="templateLoaderPath" value="/WEB-INF/templates/"/>
 	</bean>
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="cache" value="true"/>
 		<property name="prefix" value="/"/>
 		<property name="suffix" value=".ftl"/>
 		<property name="contentType" value="text/html; charset=UTF-8"/>

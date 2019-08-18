@@ -127,14 +127,13 @@
         <!-- 系统认证提交地址，如果用户退出即session丢失就会访问这个页面 -->
         <property name="loginUrl" value="/login.jsp"/>
         <!-- 登录成功后重定向的地址，不建议配置 -->
-        <!--<property name="successUrl" value="/index.do"/>-->
+        <property name="successUrl" value="/index"/>
         <!-- 权限验证失败跳转的页面，需要配合Spring的ExceptionHandler异常处理机制使用 -->
         <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
 
         <!-- 自定义的过滤器链，从上向下执行，一般将`/**`放到最下面 -->
         <property name="filterChainDefinitions">
             <value>
-
                 <!-- 静态资源不拦截 -->
                 /static/** = anon
                 /lib/** = anon
@@ -142,7 +141,7 @@
                 /sys/** =anon
                 <!-- 登录页面不拦截 -->
                 /login.jsp = anon
-                /user/userLogin=anon
+                /user/userLogin = anon
                 <!-- Shiro提供了退出登录的配置`logout`，会生成路径为`/logout`的请求地址，访问这个地址即会退出当前账户并清空缓存 -->
                 /logout = logout
                 <!-- user表示身份通过或通过记住我通过的用户都能访问系统 -->
