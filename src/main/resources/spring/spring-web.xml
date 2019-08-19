@@ -1,48 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	   xmlns:context="http://www.springframework.org/schema/context"
-	   xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context.xsd
 	http://www.springframework.org/schema/mvc
 	http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
-	<!-- 配置SpringMVC -->
-	<!-- 1.开启SpringMVC注解模式 -->
-	<mvc:annotation-driven />
-	<mvc:default-servlet-handler/>
-	<context:component-scan base-package="cn.zanezz.sys.controller" />
+    <!-- 配置SpringMVC -->
+    <!-- 1.开启SpringMVC注解模式 -->
+    <mvc:annotation-driven/>
+    <mvc:default-servlet-handler/>
+    <context:component-scan base-package="cn.zanezz.sys.controller"/>
 
-	<aop:config proxy-target-class="true"/>
-	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
-		<property name="securityManager" ref="securityManager"/>
-	</bean>
+    <!--    //shiro 注解相关配置必须放到spring-mvc.xml 中-->
+    <aop:config proxy-target-class="true"/>
+    <!-- Shiro生命周期处理器-->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
 
-	<!-- 整合Freemarker -->
-	<!-- 放在InternalResourceViewResolver的前面，优先找freemarker -->
-	<bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-		<property name="templateLoaderPath" value="/WEB-INF/templates/"/>
-	</bean>
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-		<property name="cache" value="true"/>
-		<property name="prefix" value="/"/>
-		<property name="suffix" value=".ftl"/>
-		<property name="contentType" value="text/html; charset=UTF-8"/>
-	</bean>
+    <!-- 开启Shiro注解 -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor">
+        <property name="proxyTargetClass" value="true"/>
+    </bean>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
 
-	 <!-- 3.配置jsp 显示ViewResolver -->
-	 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-	 	<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
-	 	<property name="prefix" value="/" />
-	 	<property name="suffix" value=".jsp" />
-	 </bean>
-	 
-	 <!-- 4.扫描web相关的bean -->
-	<!-- 控制器异常处理，用来处理权限、角色验证失败出现的UnauthorizedException异常 -->
-	<bean id="exceptionHandlerExceptionResolver"
-		  class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver">
-	</bean>
-	<bean class="cn.zanezz.sys.exception.DefaultExceptionHandler"/>
+
+    <!-- 整合Freemarker -->
+    <!-- 配置freemarker的配置文件路径 -->
+    <bean id="freemarkerConfiguration" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="location" value="classpath:other/freemarker.properties"/>
+    </bean>
+    <!-- 放在InternalResourceViewResolver的前面，优先找freemarker -->
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="freemarkerSettings" ref="freemarkerConfiguration"/>
+        <property name="templateLoaderPath" value="/WEB-INF/templates/"/>
+    </bean>
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="cache" value="true"/>
+        <property name="prefix" value="/"/>
+        <property name="suffix" value=".ftl"/>
+        <property name="contentType" value="text/html; charset=UTF-8"/>
+    </bean>
+
+    <!-- 3.配置jsp 显示ViewResolver -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- 4.扫描web相关的bean -->
+    <!-- 控制器异常处理，用来处理权限、角色验证失败出现的UnauthorizedException异常 -->
+    <!--    <bean id="exceptionHandlerExceptionResolver"-->
+    <!--          class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver">-->
+    <!--    </bean>-->
+    <!--    自定义shiro 异常处理器，主要是解决未验证时出现报错而不进行页面跳转的现象 -->
+    <bean id="exceptionResolver" class="cn.zanezz.sys.exception.DefaultExceptionHandler"/>
+
 </beans>

@@ -67,7 +67,7 @@ public class generator {
         // 包配置
         PackageConfig pc = new PackageConfig();
         pc.setModuleName(scanner("模块名"));
-        pc.setParent("com.hello");
+        pc.setParent("cn.zanezz");
         mpg.setPackageInfo(pc);
 
         // 自定义配置

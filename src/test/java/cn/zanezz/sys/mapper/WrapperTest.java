@@ -1,5 +1,6 @@
 package cn.zanezz.sys.mapper;
 
+import cn.zanezz.sys.service.IUsersRolesService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import cn.zanezz.sys.controller.UsersController;
 import cn.zanezz.sys.entity.Users;
@@ -10,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -33,6 +35,10 @@ public class WrapperTest  {
     private IUsersService usersService;
 
     @Autowired
+    private IUsersRolesService usersRolesService;
+
+
+    @Autowired
     private PasswordHelper passwordHelper;
     @Test
     public void testWrapper() {
@@ -41,6 +47,19 @@ public class WrapperTest  {
         System.out.println("111111111111111111111111111111111"+userlist);
         logger.error(userlist);
         logger.info(userlist);
+
+    }
+
+    @Test
+    public void testUsersRoles() {
+
+        List aList = usersRolesService.getRolesByUsername("admin");
+        System.out.println(aList);
+
+        QueryWrapper<Users> usersQueryWrapper = new QueryWrapper<>();
+
+        List<Users> users = usersService.list(usersQueryWrapper.ge("id", 2));
+
 
     }
 

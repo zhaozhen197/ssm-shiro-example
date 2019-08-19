@@ -1,2 +1,5 @@
-16:10:44.519 WARN  com.baomidou.mybatisplus.core.metadata.TableInfoHelper 285 initTableFields - Warn: Could not find @TableId in Class: Users.
-16:10:46.570 ERROR WrapperTest 42 testWrapper - [Users{username=admin, password=95657d3e3052fb39d70d610c70a9a575, salt=87cc486c53b49f72f5b96bb55d93bc7f, roleId=超级管理员, locked=false}]
+17:25:58.512 WARN  com.baomidou.mybatisplus.core.metadata.TableInfoHelper 285 initTableFields - Warn: Could not find @TableId in Class: cn.zanezz.sys.entity.Users.
+17:25:58.570 WARN  com.baomidou.mybatisplus.core.metadata.TableInfoHelper 285 initTableFields - Warn: Could not find @TableId in Class: cn.zanezz.sys.entity.UsersRoles.
+17:26:01.719 WARN  com.baomidou.mybatisplus.core.metadata.TableInfoHelper 285 initTableFields - Warn: Could not find @TableId in Class: cn.zanezz.sys.entity.Permissions.
+17:26:01.804 WARN  com.baomidou.mybatisplus.core.metadata.TableInfoHelper 285 initTableFields - Warn: Could not find @TableId in Class: cn.zanezz.sys.entity.RolesPermissions.
+17:26:01.872 WARN  com.baomidou.mybatisplus.core.metadata.TableInfoHelper 285 initTableFields - Warn: Could not find @TableId in Class: cn.zanezz.sys.entity.Roles.

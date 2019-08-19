@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-		http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-4.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
        default-lazy-init="true">
 
 
@@ -13,7 +13,7 @@
     </bean>
 
     <!-- 凭证匹配器 -->
-    <bean id="credentialsMatcher" class="cn.zanezz.sys.credentials.RetryLimitHashedCredentialsMatcher" >
+    <bean id="credentialsMatcher" class="cn.zanezz.sys.credentials.RetryLimitHashedCredentialsMatcher">
         <!-- 使用Spring构造器注入cacheManager -->
         <constructor-arg ref="cacheManager"/>
         <!-- 指定散列算法名称 -->
@@ -142,6 +142,8 @@
                 <!-- 登录页面不拦截 -->
                 /login.jsp = anon
                 /user/userLogin = anon
+                /unauthorized.jsp = anon
+                /error.jsp = anon
                 <!-- Shiro提供了退出登录的配置`logout`，会生成路径为`/logout`的请求地址，访问这个地址即会退出当前账户并清空缓存 -->
                 /logout = logout
                 <!-- user表示身份通过或通过记住我通过的用户都能访问系统 -->
@@ -156,8 +158,6 @@
         </property>
     </bean>
 
-    <!-- Shiro生命周期处理器-->
-    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
 
 
 </beans>
